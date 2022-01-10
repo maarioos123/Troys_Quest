@@ -1,8 +1,8 @@
 package objects;
 
-import main_game.Animation;
-import main_game.GamePanel;
-import main_game.Resource;
+import main.game.Animation;
+import main.game.GamePanel;
+import main.game.Resource;
 import java.awt.Graphics2D;
 
 import java.awt.image.BufferedImage;
@@ -36,10 +36,10 @@ public abstract class StaticObject extends GameObject {
         double screenY = this.getY();
         if (images.length == 1) {
             g2.drawImage(images[0], (int) screenX, (int) screenY,
-                    gamePanel.tileSize, gamePanel.tileSize, null);
+                    GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
         } else {
             animation.drawAnimation(g2, (int) screenX, (int) screenY,
-                    gamePanel.tileSize, gamePanel.tileSize);
+                    GamePanel.TILE_SIZE, GamePanel.TILE_SIZE);
         }
     }
 

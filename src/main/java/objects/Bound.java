@@ -1,9 +1,9 @@
 package objects;
 
 
-import main_game.GamePanel;
+import main.game.GamePanel;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 
 //class that will set the bound of the screen
 //it sets the starting point and ending point
@@ -17,16 +17,16 @@ public class Bound {
     public Bound(Player player, GamePanel gamePanel) {
         this.player = player;
         this.gamepanel = gamePanel;
-        start = new Obstacle(5 * gamePanel.tileSize, gamePanel.tileSize * 5,
-                gamePanel.tileSize, gamePanel.tileSize * 5, "Flag",gamepanel);
+        start = new Obstacle(5 * GamePanel.TILE_SIZE, GamePanel.TILE_SIZE * 5,
+                GamePanel.TILE_SIZE, GamePanel.TILE_SIZE * 5, "Flag", gamepanel);
         /*we change start worldX because we need tha flag
         to spawn down next to the player but the rectangle to be taller */
-        start.worldY = (9 * gamePanel.tileSize);
-        end = new Obstacle((gamePanel.maxWorldCol - 2) * gamePanel.tileSize ,
-                gamePanel.tileSize * 5, gamePanel.tileSize, gamePanel.tileSize * 5, "Flag", gamePanel);
+        start.worldY = (9 * GamePanel.TILE_SIZE);
+        end = new Obstacle((GamePanel.MAX_WORLD_COL - 2) * GamePanel.TILE_SIZE,
+                GamePanel.TILE_SIZE * 5, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE * 5, "Flag", gamePanel);
         /* we change end worldX because we need tha flag
         to spawn down next to the player but the rectangle to be taller */
-        end.worldY = (9 * gamePanel.tileSize);
+        end.worldY = (9 * GamePanel.TILE_SIZE);
 
     }
 
@@ -35,7 +35,7 @@ public class Bound {
     public void update() {
         start.update();
         end.update();
-        if(gamepanel.gameState == GamePanel.PLAY_STATE) {
+        if (gamepanel.gameState == GamePanel.PLAY_STATE) {
             if (start.worldX - player.getX() <= 10) {
                 if (start.intersects(player)) {
                     player.setX(player.getX() + 5);
@@ -44,7 +44,7 @@ public class Bound {
             if (end.worldX - player.getX() <= 10) {
                 if (end.intersects(player)) {
                     gamepanel.music.stopMusic();
-                    gamepanel.music.playMusic(7 , false);
+                    gamepanel.music.playMusic(7, false);
                     gamepanel.player.setCollision(false);
                     gamepanel.gameState = GamePanel.WIN_LOSE_STATE;
                 }

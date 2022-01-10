@@ -1,4 +1,4 @@
-package main_game;
+package main.game;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -54,27 +54,27 @@ public class HUD {
     public void render(Graphics2D g2) {
         g2.setFont(gameFont);
         g2.setColor(Color.WHITE);
-        g2.drawImage(heartImage, gamepanel.tileSize / 2, gamepanel.tileSize / 2 - 10,
-                gamepanel.tileSize, gamepanel.tileSize, null); //pixelated heart drawing
+        g2.drawImage(heartImage, gamepanel.TILE_SIZE / 2, gamepanel.TILE_SIZE / 2 - 10,
+                gamepanel.TILE_SIZE, gamepanel.TILE_SIZE, null); //pixelated heart drawing
         g2.drawString("x " + gamepanel.player.getLivesLeft(), 74, 50); //player's lives left
-        g2.drawImage(coinImage, (gamepanel.tileSize / 2) + 3 * gamepanel.tileSize, gamepanel.tileSize / 2 - 10,
-                gamepanel.tileSize, gamepanel.tileSize, null); //coin image drawing
-        g2.drawString("x " + gamepanel.player.getCoinsCollected(), (int) ((gamepanel.tileSize / 2) + 4.5 * gamepanel.tileSize), 50); //level coins collected
+        g2.drawImage(coinImage, (gamepanel.TILE_SIZE / 2) + 3 * gamepanel.TILE_SIZE, gamepanel.TILE_SIZE / 2 - 10,
+                gamepanel.TILE_SIZE, gamepanel.TILE_SIZE, null); //coin image drawing
+        g2.drawString("x " + gamepanel.player.getCoinsCollected(), (int) ((gamepanel.TILE_SIZE / 2) + 4.5 * gamepanel.TILE_SIZE), 50); //level coins collected
         if (counter < 200 && GamePanel.currentLevelNumber == 1) { //Only at lv1 and for around 3 seconds(200/60FPS) the controls are displayed
             g2.setColor(Color.BLACK);
             g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 20));
             g2.drawString("MOVE", 630, 90);
             g2.drawImage(buttons, 545, 60, 120, 80, null);
             g2.drawString("ATTACK", 680, 160);
-            g2.drawImage(spaceBar, 490, 85, 5 * gamepanel.tileSize, 3 * gamepanel.tileSize, null);
+            g2.drawImage(spaceBar, 490, 85, 5 * gamepanel.TILE_SIZE, 3 * gamepanel.TILE_SIZE, null);
         }
         g2.setColor(Color.WHITE);
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 35));
         //Time Display based on player state
         if (gamepanel.player.getLivesLeft() == 0) {
-            g2.drawString("Time:" + decFormat.format(deathTime), gamepanel.tileSize * 10, 50);
+            g2.drawString("Time:" + decFormat.format(deathTime), gamepanel.TILE_SIZE * 10, 50);
         } else {
-            g2.drawString("Time:" + decFormat.format(levelTimer), gamepanel.tileSize * 10, 50);
+            g2.drawString("Time:" + decFormat.format(levelTimer), gamepanel.TILE_SIZE * 10, 50);
         }
     }
 

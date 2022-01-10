@@ -1,9 +1,9 @@
 package objects;
 
 import java.awt.image.BufferedImage;
-import main_game.Animation;
-import main_game.GamePanel;
-import main_game.Resource;
+import main.game.Animation;
+import main.game.GamePanel;
+import main.game.Resource;
 
 public abstract class MovingObject extends GameObject {
     //MovingObject needs Game Panel to spawn on it

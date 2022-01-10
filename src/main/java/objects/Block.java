@@ -1,9 +1,9 @@
 package objects;
 
 
-import main_game.Animation;
-import main_game.GamePanel;
-import main_game.Resource;
+import main.game.Animation;
+import main.game.GamePanel;
+import main.game.Resource;
 
 import java.awt.*;
 import java.awt.geom.Line2D;

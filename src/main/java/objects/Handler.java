@@ -1,8 +1,10 @@
 package objects;
 
+import main.game.GamePanel;
 import sounds.Sound;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.text.DecimalFormat;
 import java.util.LinkedList;
 
@@ -27,8 +29,6 @@ public class Handler {
     double timer;
     double collisionTime = 0;
     double enemyDeathTime = 0;
-    int counter1;
-    int Counter2;
 
     /**
      * We only pass Player as a parameter because all the other objects
@@ -51,9 +51,8 @@ public class Handler {
         for (LinkedList l : all) {
             for (Object x : l) {
                 GameObject k = ((GameObject) x);
-                boolean b = k.getX() + player.gamePanel.tileSize > player.getX() - player.screenX && //distance between player and left edge
-                        k.getX() - player.gamePanel.tileSize < player.getX() + player.screenX + 2 * player.gamePanel.tileSize;
-                if(b) {
+                if (k.getX() + GamePanel.TILE_SIZE > player.getX() - player.screenX
+                        && k.getX() - GamePanel.TILE_SIZE < player.getX() + player.screenX + 2 * GamePanel.TILE_SIZE) {
                     k.render(g2);
                 }
 
@@ -97,8 +96,7 @@ public class Handler {
     public boolean checkObstacleCollision() {
         boolean b = false;
         for (GameObject object : obstacles) {
-            boolean b2 = object.getX() + player.gamePanel.tileSize > player.getX() - player.screenX && //distance between player and left edge
-                    object.getX() - player.gamePanel.tileSize < player.getX() + player.screenX + 2 * player.gamePanel.tileSize;
+
 
             if (object.intersects(player) && player.isCollidable() && !object.getClass().equals(Bird.class)) {
                 b = true;
@@ -154,7 +152,7 @@ public class Handler {
                 player.screenY = (int) (block.platformfloor - player.height);
                 player.jumped = false;
             } else {
-                player.floor = player.gamePanel.floor;
+                player.floor = GamePanel.FLOOR;
             }
             i++;
         }

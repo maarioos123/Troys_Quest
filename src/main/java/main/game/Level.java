@@ -1,4 +1,4 @@
-package main_game;
+package main.game;
 
 import objects.*;
 import Tiles.TileManager;
@@ -104,67 +104,67 @@ public class Level {
      * no parameters passed , different levels handled internally via values of instance variables
      */
     public void setupGameObjects() {
-        int startingpoint = 9 * gamePanel.tileSize; //starting point in map is where the player spawns
+        int startingpoint = 9 * gamePanel.TILE_SIZE; //starting point in map is where the player spawns
         //we spawn 4 times in a row an obstacle and the we spawn an enemy for our player to fight
         for (int i = 1; i <= 20; i++) {
             int randomTile = rand.nextInt(3);
-            int spawnX = startingpoint + randomTile * gamePanel.tileSize;
+            int spawnX = startingpoint + randomTile * gamePanel.TILE_SIZE;
             if (i % 4 == 0 && hasEnemies) {
-                Enemy enemy = new Enemy(spawnX, 8 * gamePanel.tileSize,
-                         3 * gamePanel.tileSize, 3 * gamePanel.tileSize, enemyName[0], gamePanel,1, 0,1);
+                Enemy enemy = new Enemy(spawnX, 8 * gamePanel.TILE_SIZE,
+                         3 * gamePanel.TILE_SIZE, 3 * gamePanel.TILE_SIZE, enemyName[0], gamePanel,1, 0,1);
                 // so that the enemy touches the ground , because minotaur png's are not the resolution we need
                 //enemy.y = (int) enemy.worldY + gamePanel.tileSize / 2;
                 handler.add(enemy);
             } else {
                 // used to choose randomly
                 // one of the 2 obstacles(Fire or spikesRoller)
-                handler.add(new Obstacle(spawnX, gamePanel.floor, 30, gamePanel.tileSize,
+                handler.add(new Obstacle(spawnX, gamePanel.FLOOR, 30, gamePanel.TILE_SIZE,
                         obstacleName[GamePanel.currentLevelNumber == 3 ? rand.nextInt(2) : 0], gamePanel));
                 /* we spawn a coin above an obstacle with a random way to make player
                 jump a little or a lot to reach it and also make game harder*/
                 int randomY = (rand.nextInt(3) + 1);
-                handler.add(new Coin(spawnX, gamePanel.floor - (randomY * gamePanel.tileSize),
-                        gamePanel.tileSize / 2, gamePanel.tileSize / 2,"Coin", gamePanel));
+                handler.add(new Coin(spawnX, gamePanel.FLOOR - (randomY * gamePanel.TILE_SIZE),
+                        gamePanel.TILE_SIZE / 2, gamePanel.TILE_SIZE / 2,"Coin", gamePanel));
             }
             if (this.hasBlocks) {
                 //we spawn blocks on top of obstacles or enemies
-                handler.add(new Block(spawnX + gamePanel.tileSize, 6.5 * gamePanel.tileSize,
-                        gamePanel.tileSize, gamePanel.tileSize,"platform" + GamePanel.currentLevelNumber, gamePanel));
+                handler.add(new Block(spawnX + gamePanel.TILE_SIZE, 6.5 * gamePanel.TILE_SIZE,
+                        gamePanel.TILE_SIZE, gamePanel.TILE_SIZE,"platform" + GamePanel.currentLevelNumber, gamePanel));
                 if(rand.nextInt(11) < 8) {// 9/11 times the obstacle has a block above it
                     //we spawn blocks on top of obstacles or enemies
-                    handler.add(new Block(spawnX + gamePanel.tileSize, 6.5 * gamePanel.tileSize,
-                            gamePanel.tileSize, gamePanel.tileSize,"platform" + GamePanel.currentLevelNumber, gamePanel));
+                    handler.add(new Block(spawnX + gamePanel.TILE_SIZE, 6.5 * gamePanel.TILE_SIZE,
+                            gamePanel.TILE_SIZE, gamePanel.TILE_SIZE,"platform" + GamePanel.currentLevelNumber, gamePanel));
                     if (rand.nextInt(11) < 6) {// 50% of blocks spawn a block next to them
-                        handler.add(new Block(spawnX + 2 * gamePanel.tileSize, 6.5 * gamePanel.tileSize,
-                                gamePanel.tileSize, gamePanel.tileSize,"platform" + GamePanel.currentLevelNumber, gamePanel));
+                        handler.add(new Block(spawnX + 2 * gamePanel.TILE_SIZE, 6.5 * gamePanel.TILE_SIZE,
+                                gamePanel.TILE_SIZE, gamePanel.TILE_SIZE,"platform" + GamePanel.currentLevelNumber, gamePanel));
                             if(rand.nextInt(6) < 3) {
-                                handler.add(new Block(spawnX + 3 * gamePanel.tileSize, 5.5 * gamePanel.tileSize,
-                                        gamePanel.tileSize, gamePanel.tileSize,"platform" + GamePanel.currentLevelNumber, gamePanel));
+                                handler.add(new Block(spawnX + 3 * gamePanel.TILE_SIZE, 5.5 * gamePanel.TILE_SIZE,
+                                        gamePanel.TILE_SIZE, gamePanel.TILE_SIZE,"platform" + GamePanel.currentLevelNumber, gamePanel));
                                 if(rand.nextInt(4) >= 2) {
-                                    handler.add(new Coin(spawnX + 3 * gamePanel.tileSize, 4.8 * gamePanel.tileSize,
-                                             gamePanel.tileSize / 2 , gamePanel.tileSize / 2 ,"Coin", gamePanel));
+                                    handler.add(new Coin(spawnX + 3 * gamePanel.TILE_SIZE, 4.8 * gamePanel.TILE_SIZE,
+                                             gamePanel.TILE_SIZE / 2 , gamePanel.TILE_SIZE / 2 ,"Coin", gamePanel));
                                 } else {
-                                    handler.add(new Obstacle(spawnX + 3 * gamePanel.tileSize, 4.5 * gamePanel.tileSize,
-                                            30, gamePanel.tileSize, obstacleName[GamePanel.currentLevelNumber == 3 ? rand.nextInt(2) : 0], gamePanel));
+                                    handler.add(new Obstacle(spawnX + 3 * gamePanel.TILE_SIZE, 4.5 * gamePanel.TILE_SIZE,
+                                            30, gamePanel.TILE_SIZE, obstacleName[GamePanel.currentLevelNumber == 3 ? rand.nextInt(2) : 0], gamePanel));
                                 }
                             }
                     }
                 }
             }
             // we spawn coins after an obstacle or enemy for reward
-            handler.add(new Coin(spawnX + 2 * gamePanel.tileSize, gamePanel.floor,
-                    gamePanel.tileSize / 2, gamePanel.tileSize / 2,"Coin", gamePanel));
-            startingpoint += 5 * gamePanel.tileSize;
+            handler.add(new Coin(spawnX + 2 * gamePanel.TILE_SIZE, gamePanel.FLOOR,
+                    gamePanel.TILE_SIZE / 2, gamePanel.TILE_SIZE / 2,"Coin", gamePanel));
+            startingpoint += 5 * gamePanel.TILE_SIZE;
             if (GamePanel.currentLevelNumber == 3 && i == 18) {
                 break;
             }
         }
-        Bird bird = new Bird(18 * gamePanel.tileSize, 5 * gamePanel.tileSize,
-                gamePanel.tileSize, gamePanel.tileSize,"Bird", gamePanel,4,0);
+        Bird bird = new Bird(18 * gamePanel.TILE_SIZE, 5 * gamePanel.TILE_SIZE,
+                gamePanel.TILE_SIZE, gamePanel.TILE_SIZE,"Bird", gamePanel,4,0);
         handler.add(bird);
         if (this.hasFinalBoss) {
-            Enemy enemy = new Enemy((gamePanel.maxWorldCol - 10) * gamePanel.tileSize,
-                    7 * gamePanel.tileSize , 3 * gamePanel.tileSize, 3 * gamePanel.tileSize, enemyName[1], gamePanel, 1,0,3);
+            Enemy enemy = new Enemy((gamePanel.MAX_WORLD_COL - 10) * gamePanel.TILE_SIZE,
+                    7 * gamePanel.TILE_SIZE, 3 * gamePanel.TILE_SIZE, 3 * gamePanel.TILE_SIZE, enemyName[1], gamePanel, 1,0,3);
             handler.add(enemy);
         }
     }
@@ -176,31 +176,31 @@ public class Level {
     public void addArrow() {
         if (gamePanel.hud.counter % 180 == 0) { //every 3 seconds we spawn an arrow since our game updates itself 60 times per second (FPS)
             //We cut up the level into 4 areas so that arrows spawn throughout the whole map and the player never sees them appear out of thin air
-            if ((gamePanel.player.getX() < 25 * gamePanel.tileSize)) { //1st area
-                MovingObstacle arrow = new MovingObstacle(50 * gamePanel.tileSize,
-                        gamePanel.floor - rand.nextInt(6) * gamePanel.tileSize,
-                        4, 4, gamePanel.tileSize, gamePanel.tileSize, "arrow", gamePanel);
+            if ((gamePanel.player.getX() < 25 * gamePanel.TILE_SIZE)) { //1st area
+                MovingObstacle arrow = new MovingObstacle(50 * gamePanel.TILE_SIZE,
+                        gamePanel.FLOOR - rand.nextInt(6) * gamePanel.TILE_SIZE,
+                        4, 4, gamePanel.TILE_SIZE, gamePanel.TILE_SIZE, "arrow", gamePanel);
                 arrow.height -= 30;// changed arrows rectangle height manually to match the actual shape of the arrow and adjust collision box
                 arrow.y += 14;// changed arrows rectangle y manually to match the actual shape of the arrow and adjust collision box
                 handler.add(arrow);
-            } else if (gamePanel.player.getX() < 50 * gamePanel.tileSize) { //2nd area
-                MovingObstacle arrow = new MovingObstacle(75 * gamePanel.tileSize,
-                        gamePanel.floor - rand.nextInt(6) * gamePanel.tileSize,
-                        4, 4, gamePanel.tileSize, gamePanel.tileSize, "arrow", gamePanel);
+            } else if (gamePanel.player.getX() < 50 * gamePanel.TILE_SIZE) { //2nd area
+                MovingObstacle arrow = new MovingObstacle(75 * gamePanel.TILE_SIZE,
+                        gamePanel.FLOOR - rand.nextInt(6) * gamePanel.TILE_SIZE,
+                        4, 4, gamePanel.TILE_SIZE, gamePanel.TILE_SIZE, "arrow", gamePanel);
                 arrow.height -= 30;
                 arrow.y += 14;
                 handler.add(arrow);
-            } else if (gamePanel.player.getX() < 75 * gamePanel.tileSize) { //3rd area
-                MovingObstacle arrow = new MovingObstacle(100 * gamePanel.tileSize,
-                        gamePanel.floor - rand.nextInt(6) * gamePanel.tileSize,
-                        4, 4, gamePanel.tileSize, gamePanel.tileSize, "arrow", gamePanel);
+            } else if (gamePanel.player.getX() < 75 * gamePanel.TILE_SIZE) { //3rd area
+                MovingObstacle arrow = new MovingObstacle(100 * gamePanel.TILE_SIZE,
+                        gamePanel.FLOOR - rand.nextInt(6) * gamePanel.TILE_SIZE,
+                        4, 4, gamePanel.TILE_SIZE, gamePanel.TILE_SIZE, "arrow", gamePanel);
                 arrow.height -= 30;
                 arrow.y += 14;
                 handler.add(arrow);
-            } else if (gamePanel.player.getX() < 95 * gamePanel.tileSize) { //4th area
-                MovingObstacle arrow = new MovingObstacle(115 * gamePanel.tileSize,
-                        gamePanel.floor - rand.nextInt(6) * gamePanel.tileSize,
-                        4, 4, gamePanel.tileSize, gamePanel.tileSize, "arrow", gamePanel);
+            } else if (gamePanel.player.getX() < 95 * gamePanel.TILE_SIZE) { //4th area
+                MovingObstacle arrow = new MovingObstacle(115 * gamePanel.TILE_SIZE,
+                        gamePanel.FLOOR - rand.nextInt(6) * gamePanel.TILE_SIZE,
+                        4, 4, gamePanel.TILE_SIZE, gamePanel.TILE_SIZE, "arrow", gamePanel);
                 arrow.height -= 30;
                 arrow.y += 14;
                 handler.add(arrow);
@@ -245,7 +245,7 @@ public class Level {
      * minor method that commences boss music when player meets final boss
      */
     public void checkForFinalBoss() {
-        if (gamePanel.player.getX() > 80 * gamePanel.tileSize && gamePanel.player.getX() <= 80 * gamePanel.tileSize + 5) {
+        if (gamePanel.player.getX() > 80 * gamePanel.TILE_SIZE && gamePanel.player.getX() <= 80 * gamePanel.TILE_SIZE + 5) {
             gamePanel.music.stopMusic();
             gamePanel.music.playMusic(6);
         }
