@@ -14,11 +14,11 @@ import java.awt.Graphics2D;
 
 /**
  * class GamePanel
- *  creates an instance where our game takes place
- *  pre-determined height , width both for the window and the map
- *  different states depending on what state our game is currently (playing , menu , paused)
- *  many objects to handle threads , sounds , menus , bounds and key inputs
- *  3 level instances for 3 levels
+ * creates an instance where our game takes place
+ * pre-determined height , width both for the window and the map
+ * different states depending on what state our game is currently (playing , menu , paused)
+ * many objects to handle threads , sounds , menus , bounds and key inputs
+ * 3 level instances for 3 levels
  */
 public class GamePanel extends JPanel implements Runnable {
     //Screen settings
@@ -52,12 +52,12 @@ public class GamePanel extends JPanel implements Runnable {
     Sound se = new Sound();// created to have sound effects and at the same time music
     Thread gameThread; //Our main game thread
 
-    public Player player = new Player(7 * TILE_SIZE, FLOOR, 30, TILE_SIZE, "Greek_warrior",this,1,1,keyHandler);
+    public Player player = new Player(7 * TILE_SIZE, FLOOR, 30, TILE_SIZE, "Greek_warrior", this, 1, 1, keyHandler);
     //public GameObjectSetter obstacleSetter = new GameObjectSetter(this);
     public HUD hud = new HUD(this);
     public Menu menu = new Menu(this);
     public Handler handler = new Handler(player);
-    public Bound bound = new Bound(player,this);
+    public Bound bound = new Bound(player, this);
 
     //Level initialization
     String[] enemies = {"Minotaur", "FinalBoss"};
@@ -94,6 +94,7 @@ public class GamePanel extends JPanel implements Runnable {
     /**
      * resets our game to the initial state
      * restores all player/enemy/level values to their defaults
+     *
      * @param levelNumber the level from where the game is restarted from
      */
     public void resetGame(int levelNumber) {
@@ -178,6 +179,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
     }
+
     //MHN TO PEIRAZETE STO LOGO MOU
     public static int i = 0;
 
@@ -220,6 +222,7 @@ public class GamePanel extends JPanel implements Runnable {
     /**
      * draws everything on our gamepanel depending on the game state
      * hud/players/enemies/bounds/menus are drawn here
+     *
      * @param g graphics instance needed to paint our graphic environment
      */
     public void paintComponent(Graphics g) {
@@ -245,12 +248,6 @@ public class GamePanel extends JPanel implements Runnable {
             bound.render(g2);
             hud.render(g2);
         }
-
-        //OPTIMIZATION
-        long drawEnd = System.nanoTime();
-        long passed = drawEnd - drawStart;
-        //OPTIMIZATION
-        System.out.println(passed);
         g2.dispose();
     }
 

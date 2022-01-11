@@ -27,14 +27,15 @@ public class Level {
 
     /**
      * Creates instances for levels
-     * @param gamePanel passes the instance of gamepanel that we use to play the game and handles the level in the bounds of that instance
-     * @param txtPath the file path for the .txt file containing the data for the background data layout
-     * @param tileM the 2d array containng the data of the aforementioned txtPath .txt file
+     *
+     * @param gamePanel    passes the instance of gamepanel that we use to play the game and handles the level in the bounds of that instance
+     * @param txtPath      the file path for the .txt file containing the data for the background data layout
+     * @param tileM        the 2d array containng the data of the aforementioned txtPath .txt file
      * @param obstacleName an array containing the names of every obstacle that is present on the specific level
-     * @param enemyName an array containing the names of every enemy that is present on the specific level
-     * @param hasEnemies boolean value that states whether a level has enemies present or not
+     * @param enemyName    an array containing the names of every enemy that is present on the specific level
+     * @param hasEnemies   boolean value that states whether a level has enemies present or not
      * @param hasFinalBoss boolean value that states whether a level has a final bos or not
-     * @param hasBlocks boolean value that states whether a level has blocks present or not
+     * @param hasBlocks    boolean value that states whether a level has blocks present or not
      */
     public Level(GamePanel gamePanel, String txtPath,
                  TileManager tileM, String[] obstacleName, String[] enemyName, boolean hasEnemies, boolean hasFinalBoss, boolean hasBlocks) {
@@ -63,7 +64,6 @@ public class Level {
      * enemies/tiles/obstacles/coins/bounds etc
      * checks whether player take damage
      * plays player takes damage sound
-     *
      */
     public void update() {
         handler.update();
@@ -80,6 +80,7 @@ public class Level {
      * renders anything present on our level
      * tileM.render(g2) renders the tiles of the background
      * handler.render(g2) renders any enemies/obstacles/coins contained in the lists where every game object is stored
+     *
      * @param g2 graphics instance used to draw
      */
     public void render(Graphics2D g2) {
@@ -111,7 +112,7 @@ public class Level {
             int spawnX = startingpoint + randomTile * gamePanel.TILE_SIZE;
             if (i % 4 == 0 && hasEnemies) {
                 Enemy enemy = new Enemy(spawnX, 8 * gamePanel.TILE_SIZE,
-                         3 * gamePanel.TILE_SIZE, 3 * gamePanel.TILE_SIZE, enemyName[0], gamePanel,1, 0,1);
+                        3 * gamePanel.TILE_SIZE, 3 * gamePanel.TILE_SIZE, enemyName[0], gamePanel, 1, 0, 1);
                 // so that the enemy touches the ground , because minotaur png's are not the resolution we need
                 //enemy.y = (int) enemy.worldY + gamePanel.tileSize / 2;
                 handler.add(enemy);
@@ -124,47 +125,47 @@ public class Level {
                 jump a little or a lot to reach it and also make game harder*/
                 int randomY = (rand.nextInt(3) + 1);
                 handler.add(new Coin(spawnX, gamePanel.FLOOR - (randomY * gamePanel.TILE_SIZE),
-                        gamePanel.TILE_SIZE / 2, gamePanel.TILE_SIZE / 2,"Coin", gamePanel));
+                        gamePanel.TILE_SIZE / 2, gamePanel.TILE_SIZE / 2, "Coin", gamePanel));
             }
             if (this.hasBlocks) {
                 //we spawn blocks on top of obstacles or enemies
-                handler.add(new Block(spawnX + gamePanel.TILE_SIZE, 6.5 * gamePanel.TILE_SIZE,
-                        gamePanel.TILE_SIZE, gamePanel.TILE_SIZE,"platform" + GamePanel.currentLevelNumber, gamePanel));
-                if(rand.nextInt(11) < 8) {// 9/11 times the obstacle has a block above it
+                handler.add(new Block(spawnX + 3 * gamePanel.TILE_SIZE, 6.5 * gamePanel.TILE_SIZE,
+                        gamePanel.TILE_SIZE, gamePanel.TILE_SIZE, "platform" + GamePanel.currentLevelNumber, gamePanel));
+                if (rand.nextInt(11) < 8) {// 9/11 times the obstacle has a block above it
                     //we spawn blocks on top of obstacles or enemies
                     handler.add(new Block(spawnX + gamePanel.TILE_SIZE, 6.5 * gamePanel.TILE_SIZE,
-                            gamePanel.TILE_SIZE, gamePanel.TILE_SIZE,"platform" + GamePanel.currentLevelNumber, gamePanel));
+                            gamePanel.TILE_SIZE, gamePanel.TILE_SIZE, "platform" + GamePanel.currentLevelNumber, gamePanel));
                     if (rand.nextInt(11) < 6) {// 50% of blocks spawn a block next to them
                         handler.add(new Block(spawnX + 2 * gamePanel.TILE_SIZE, 6.5 * gamePanel.TILE_SIZE,
-                                gamePanel.TILE_SIZE, gamePanel.TILE_SIZE,"platform" + GamePanel.currentLevelNumber, gamePanel));
-                            if(rand.nextInt(6) < 3) {
-                                handler.add(new Block(spawnX + 3 * gamePanel.TILE_SIZE, 5.5 * gamePanel.TILE_SIZE,
-                                        gamePanel.TILE_SIZE, gamePanel.TILE_SIZE,"platform" + GamePanel.currentLevelNumber, gamePanel));
-                                if(rand.nextInt(4) >= 2) {
-                                    handler.add(new Coin(spawnX + 3 * gamePanel.TILE_SIZE, 4.8 * gamePanel.TILE_SIZE,
-                                             gamePanel.TILE_SIZE / 2 , gamePanel.TILE_SIZE / 2 ,"Coin", gamePanel));
-                                } else {
-                                    handler.add(new Obstacle(spawnX + 3 * gamePanel.TILE_SIZE, 4.5 * gamePanel.TILE_SIZE,
-                                            30, gamePanel.TILE_SIZE, obstacleName[GamePanel.currentLevelNumber == 3 ? rand.nextInt(2) : 0], gamePanel));
-                                }
+                                gamePanel.TILE_SIZE, gamePanel.TILE_SIZE, "platform" + GamePanel.currentLevelNumber, gamePanel));
+                        if (rand.nextInt(6) < 3) {
+                            handler.add(new Block(spawnX + 3 * gamePanel.TILE_SIZE, 5.5 * gamePanel.TILE_SIZE,
+                                    gamePanel.TILE_SIZE, gamePanel.TILE_SIZE, "platform" + GamePanel.currentLevelNumber, gamePanel));
+                            if (rand.nextInt(4) >= 2) {
+                                handler.add(new Coin(spawnX + 3 * gamePanel.TILE_SIZE, 4.8 * gamePanel.TILE_SIZE,
+                                        gamePanel.TILE_SIZE / 2, gamePanel.TILE_SIZE / 2, "Coin", gamePanel));
+                            } else {
+                                handler.add(new Obstacle(spawnX + 3 * gamePanel.TILE_SIZE, 4.5 * gamePanel.TILE_SIZE,
+                                        30, gamePanel.TILE_SIZE, obstacleName[GamePanel.currentLevelNumber == 3 ? rand.nextInt(2) : 0], gamePanel));
                             }
+                        }
                     }
                 }
             }
             // we spawn coins after an obstacle or enemy for reward
             handler.add(new Coin(spawnX + 2 * gamePanel.TILE_SIZE, gamePanel.FLOOR,
-                    gamePanel.TILE_SIZE / 2, gamePanel.TILE_SIZE / 2,"Coin", gamePanel));
+                    gamePanel.TILE_SIZE / 2, gamePanel.TILE_SIZE / 2, "Coin", gamePanel));
             startingpoint += 5 * gamePanel.TILE_SIZE;
             if (GamePanel.currentLevelNumber == 3 && i == 18) {
                 break;
             }
         }
         Bird bird = new Bird(18 * gamePanel.TILE_SIZE, 5 * gamePanel.TILE_SIZE,
-                gamePanel.TILE_SIZE, gamePanel.TILE_SIZE,"Bird", gamePanel,4,0);
+                gamePanel.TILE_SIZE, gamePanel.TILE_SIZE, "Bird", gamePanel, 4, 0);
         handler.add(bird);
         if (this.hasFinalBoss) {
             Enemy enemy = new Enemy((gamePanel.MAX_WORLD_COL - 10) * gamePanel.TILE_SIZE,
-                    7 * gamePanel.TILE_SIZE, 3 * gamePanel.TILE_SIZE, 3 * gamePanel.TILE_SIZE, enemyName[1], gamePanel, 1,0,3);
+                    7 * gamePanel.TILE_SIZE, 3 * gamePanel.TILE_SIZE, 3 * gamePanel.TILE_SIZE, enemyName[1], gamePanel, 1, 0, 3);
             handler.add(enemy);
         }
     }
@@ -180,8 +181,10 @@ public class Level {
                 MovingObstacle arrow = new MovingObstacle(50 * gamePanel.TILE_SIZE,
                         gamePanel.FLOOR - rand.nextInt(6) * gamePanel.TILE_SIZE,
                         4, 4, gamePanel.TILE_SIZE, gamePanel.TILE_SIZE, "arrow", gamePanel);
-                arrow.height -= 30;// changed arrows rectangle height manually to match the actual shape of the arrow and adjust collision box
-                arrow.y += 14;// changed arrows rectangle y manually to match the actual shape of the arrow and adjust collision box
+                arrow.height -=
+                        30;// changed arrows rectangle height manually to match the actual shape of the arrow and adjust collision box
+                arrow.y +=
+                        14;// changed arrows rectangle y manually to match the actual shape of the arrow and adjust collision box
                 handler.add(arrow);
             } else if (gamePanel.player.getX() < 50 * gamePanel.TILE_SIZE) { //2nd area
                 MovingObstacle arrow = new MovingObstacle(75 * gamePanel.TILE_SIZE,
@@ -212,9 +215,9 @@ public class Level {
      * Calculates the score that a player has achieved when he finishes a level
      *
      * @param levelCompletionTime = the time that a player took to complete a level
-     * @param livesLeft = the numbers of lives left that the player had when level ended
-     * @param coinsCollected = the number of coins player collected
-     * @param enemiesKilled = the number of enemies player killed in the level
+     * @param livesLeft           = the numbers of lives left that the player had when level ended
+     * @param coinsCollected      = the number of coins player collected
+     * @param enemiesKilled       = the number of enemies player killed in the level
      * @return int value of the calculated score , computed in line @see 195
      */
     public int calculateScore(double levelCompletionTime, int livesLeft, int coinsCollected, int enemiesKilled) {

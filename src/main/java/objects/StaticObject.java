@@ -3,6 +3,7 @@ package objects;
 import main.game.Animation;
 import main.game.GamePanel;
 import main.game.Resource;
+
 import java.awt.Graphics2D;
 
 import java.awt.image.BufferedImage;
@@ -17,19 +18,18 @@ public abstract class StaticObject extends GameObject {
         getStaticObjectImage();
     }
 
-    public void  getStaticObjectImage() {
+    public void getStaticObjectImage() {
         images = Resource.getFilesInDir("src/main/resources/objects/" + name);
         animation = new Animation(0, images);
     }
 
     public void update() {
-        if(images.length !=1) {
+        if (images.length != 1) {
             animation.runAnimation();
         }
     }
 
     public void render(Graphics2D g2) {
-        super.render(g2);
         /*centers the player in relation to the screen in x axis,
         gp.player.screenX is used to offset the difference*/
         double screenX = this.getX() - gamePanel.player.getX() + gamePanel.player.screenX;

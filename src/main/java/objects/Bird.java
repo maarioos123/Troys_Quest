@@ -28,15 +28,14 @@ public class Bird extends MovingObject {
     @Override
     //paint Bird left animation if flys left else paints right animation
     public void render(Graphics2D g) {
-        super.render(g);
         double screenX = this.getX() - gamePanel.player.getX() + gamePanel.player.screenX;
         double screenY = this.getY();
         switch (direction) {
             case LEFT -> {
-                leftanimation.drawAnimation(g,(int) screenX, (int) screenY, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE);
+                leftanimation.drawAnimation(g, (int) screenX, (int) screenY, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE);
             }
             case RIGHT -> {
-                rightanimation.drawAnimation(g,(int) screenX, (int) screenY, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE);
+                rightanimation.drawAnimation(g, (int) screenX, (int) screenY, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE);
             }
         }
 

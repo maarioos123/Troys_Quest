@@ -114,23 +114,20 @@ public class Player extends MovingObject {
     // the direction variable indicates which images are to be drawn for each animation of the player
     @Override
     public void render(Graphics2D g) {
-        //super.render(g);
-        g.drawRect(this.attackHitbox.x, this.attackHitbox.y, this.attackHitbox.width,
-                this.attackHitbox.height);
         //this if is in place so that when the player is hit ,
         // he is invulnerable and his body is shown blinking to indicate that state
         if (this.isCollidable() || this.state == State.DEAD) {//when a player is hit collision is turned off for some seconds so this.isCollision comes out false
             switch (state) {
-                case JUMP -> jumpinganimation.drawAnimation(g, screenX, screenY ,
-                        GamePanel.TILE_SIZE , GamePanel.TILE_SIZE);
+                case JUMP -> jumpinganimation.drawAnimation(g, screenX, screenY,
+                        GamePanel.TILE_SIZE, GamePanel.TILE_SIZE);
                 case DEAD -> deathanimation.drawAnimation(g, screenX, screenY,
                         GamePanel.TILE_SIZE + 24, GamePanel.TILE_SIZE + 24);
-                case LEFT -> leftanimation.drawAnimation(g, screenX, screenY ,
-                        GamePanel.TILE_SIZE , GamePanel.TILE_SIZE);
+                case LEFT -> leftanimation.drawAnimation(g, screenX, screenY,
+                        GamePanel.TILE_SIZE, GamePanel.TILE_SIZE);
                 case RIGHT -> rightanimation.drawAnimation(g, screenX, screenY
-                        , GamePanel.TILE_SIZE , GamePanel.TILE_SIZE);
+                        , GamePanel.TILE_SIZE, GamePanel.TILE_SIZE);
                 case ALIVE -> idleanimation.drawAnimation(g, screenX, screenY
-                        , GamePanel.TILE_SIZE , GamePanel.TILE_SIZE);
+                        , GamePanel.TILE_SIZE, GamePanel.TILE_SIZE);
                 case ATTACK -> attackanimation.drawAnimation(g, screenX, screenY,
                         GamePanel.TILE_SIZE + 50, GamePanel.TILE_SIZE);
             }
@@ -155,7 +152,8 @@ public class Player extends MovingObject {
         //Only when player reaches the right edge of the screen , his screenX and screenY need to be adjusted
         int rightDiff = GamePanel.SCREEN_WIDTH - screenX;
         if (rightDiff > GamePanel.WORLD_WIDTH - getX()) {
-            screenX = GamePanel.SCREEN_WIDTH - (GamePanel.WORLD_WIDTH - (int) getX()); //and we subtract the difference from the current tile from the edge of the screen
+            screenX =
+                    GamePanel.SCREEN_WIDTH - (GamePanel.WORLD_WIDTH - (int) getX()); //and we subtract the difference from the current tile from the edge of the screen
         }
     }
 
@@ -204,21 +202,24 @@ public class Player extends MovingObject {
             setSpeedx(3);
             state = State.LEFT;
             this.setX(this.getX() - this.getSpeedx());//moves the player along the x axis to the left
-            attackHitbox.x = (int) (this.getX() + GamePanel.TILE_SIZE);//moves the attack hitbox to follow players' hitbox
+            attackHitbox.x =
+                    (int) (this.getX() + GamePanel.TILE_SIZE);//moves the attack hitbox to follow players' hitbox
             leftanimation.runAnimation();
         }
         if (keyHandler.rightPressed) {
             setSpeedx(3);
             state = State.RIGHT;
             this.setX(this.getX() + getSpeedx());//moves the player along the x axis to the right
-            attackHitbox.x = (int) (this.getX() + GamePanel.TILE_SIZE);//moves the attack hitbox to follow players' hitbox
+            attackHitbox.x =
+                    (int) (this.getX() + GamePanel.TILE_SIZE);//moves the attack hitbox to follow players' hitbox
             rightanimation.runAnimation();
         }
         if (keyHandler.rightReleased) {
             friction++;
             this.setSpeedx(getSpeedx() * 0.85);
             this.setX(this.getX() + getSpeedx());
-            attackHitbox.x = (int) (this.getX() + GamePanel.TILE_SIZE);//moves the attack hitbox to follow players' hitbox
+            attackHitbox.x =
+                    (int) (this.getX() + GamePanel.TILE_SIZE);//moves the attack hitbox to follow players' hitbox
             rightanimation.runAnimation();
             if (friction == 5) {
                 friction = 0;
@@ -226,13 +227,14 @@ public class Player extends MovingObject {
                 keyHandler.rightReleased = false;
             }
         }
-        if (keyHandler.leftReleased){
+        if (keyHandler.leftReleased) {
             friction++;
-            this.setSpeedx(getSpeedx()*0.85);
+            this.setSpeedx(getSpeedx() * 0.85);
             this.setX(this.getX() - getSpeedx());
-            attackHitbox.x = (int) (this.getX() + GamePanel.TILE_SIZE);//moves the attack hitbox to follow players' hitbox
+            attackHitbox.x =
+                    (int) (this.getX() + GamePanel.TILE_SIZE);//moves the attack hitbox to follow players' hitbox
             leftanimation.runAnimation();
-            if(friction == 5) {
+            if (friction == 5) {
                 friction = 0;
                 setSpeedx(0);
                 keyHandler.leftReleased = false;

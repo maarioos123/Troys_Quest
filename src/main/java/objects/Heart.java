@@ -2,6 +2,9 @@ package objects;
 
 
 import main.game.GamePanel;
+
+import java.awt.*;
+
 /**
  * public class Heart
  * used to create a Heart for our player to increase his lives
@@ -31,4 +34,11 @@ public class Heart extends StaticObject {
         return collision;
     }
 
+    @Override
+    public void render(Graphics2D g2) {
+        double screenX = this.getX() - gamePanel.player.getX() + gamePanel.player.screenX;
+        double screenY = this.getY();
+        g2.drawImage(images[0], (int) screenX , (int) screenY + GamePanel.TILE_SIZE,
+                GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
+    }
 }

@@ -26,7 +26,7 @@ public abstract class GameObject extends Rectangle {
     public Rectangle area; //creating invisible rectangle to store data
 
     //generic constructor , spawns game objects at x ,y coordinates , sets the speed in x,y axis 
-    public GameObject(double worldX, double worldY, int width, int height, String name,  GamePanel gamePanel) {
+    public GameObject(double worldX, double worldY, int width, int height, String name, GamePanel gamePanel) {
         super((int) worldX, (int) worldY, width, height);
         this.worldX = worldX;
         this.worldY = worldY;
@@ -35,20 +35,18 @@ public abstract class GameObject extends Rectangle {
     }
 
 
-    public void render(Graphics2D g2) {
-        g2.setColor(Color.RED);
-        g2.drawRect(x, y, width, height);
-    }
+    public abstract void render(Graphics2D g2);
 
-    public void update() {
-    }
+    public abstract void update();
+
 
     //getters and setters for each field
     public double getX() {
         return worldX;
     }
 
-    /**on this method we also change the rectangle x,y cords
+    /**
+     * on this method we also change the rectangle x,y cords
      * to make the collision rectangle follow along with the object
      **/
     public void setX(double worldx) {
