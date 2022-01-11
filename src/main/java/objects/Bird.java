@@ -1,9 +1,9 @@
 
 package objects;
 
-import main_game.Animation;
-import main_game.GamePanel;
-import main_game.Resource;
+import main.game.Animation;
+import main.game.GamePanel;
+import main.game.Resource;
 
 import java.awt.*;
 
@@ -33,10 +33,10 @@ public class Bird extends MovingObject {
         double screenY = this.getY();
         switch (direction) {
             case LEFT -> {
-                leftanimation.drawAnimation(g,(int) screenX, (int) screenY, gamePanel.tileSize, gamePanel.tileSize);
+                leftanimation.drawAnimation(g,(int) screenX, (int) screenY, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE);
             }
             case RIGHT -> {
-                rightanimation.drawAnimation(g,(int) screenX, (int) screenY, gamePanel.tileSize, gamePanel.tileSize);;
+                rightanimation.drawAnimation(g,(int) screenX, (int) screenY, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE);
             }
         }
 

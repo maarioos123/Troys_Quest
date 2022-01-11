@@ -1,9 +1,9 @@
 package objects;
 
-import main_game.*;
+import main.game.GamePanel;
 
 
-import java.awt.*;
+import java.awt.Graphics2D;
 
 /**
  * public class MovingObstacle
@@ -31,7 +31,7 @@ public class MovingObstacle extends MovingObject {
         /*centers the player in relation to the screen in y axis,
         gp.player.screenY is used to offset the difference*/
         double screenY = this.getY();
-        leftanimation.drawAnimation(g , (int) screenX, (int) screenY, gamePanel.tileSize, gamePanel.tileSize);
+        leftanimation.drawAnimation(g , (int) screenX, (int) screenY, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE);
     }
 
     @Override

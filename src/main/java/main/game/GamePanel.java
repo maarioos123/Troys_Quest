@@ -1,16 +1,19 @@
-package main_game;
+package main.game;
 
-
+import Tiles.TileManager;
 import objects.Bound;
 import objects.Handler;
 import objects.Player;
 import sounds.Sound;
-import Tiles.TileManager;
+
 import javax.swing.JPanel;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 /**
- * class GamePanel.
+ * class GamePanel
  *  creates an instance where our game takes place
  *  pre-determined height , width both for the window and the map
  *  different states depending on what state our game is currently (playing , menu , paused)
@@ -19,26 +22,26 @@ import java.awt.*;
  */
 public class GamePanel extends JPanel implements Runnable {
     //Screen settings
-    public static final int originalTileSize = 16; // size of tile
-    public static final int scale = 3; // scaling size that will scale the tiles
-    public static final int tileSize = originalTileSize * scale; //tile size after scaling (48)
-    public static final int floor = 9 * tileSize; //Here is the floor level
-    public static final int maxScreenCol = 16; // how many tiles will be horizontally
-    public static final int maxScreenRow = 12; //how many tiles will be vertically
-    public static final int maxWorldCol = 112; // total map tiles on x axis
-    public static final int maxWorldRow = 12; // total map tiles on y axis
-    public static final int worldWidth = tileSize * maxWorldCol; //total map width
-    public static final int worldHeight = tileSize * maxWorldRow; //total map height
-    public static final int screenWidth = tileSize * maxScreenCol; // screen width 768
-    public static final int screenHeight = tileSize * maxScreenRow; // screen height 576
+    public static final int ORIGINAL_TILE_SIZE = 16; // size of tile
+    public static final int SCALE = 3; // scaling size that will scale the tiles
+    public static final int TILE_SIZE = ORIGINAL_TILE_SIZE * SCALE; //tile size after scaling (48)
+    public static final int FLOOR = 9 * TILE_SIZE; //Here is the floor level
+    public static final int MAX_SCREEN_COL = 16; // how many tiles will be horizontally
+    public static final int MAX_SCREEN_ROW = 12; //how many tiles will be vertically
+    public static final int MAX_WORLD_COL = 112; // total map tiles on x axis
+    public static final int MAX_WORLD_ROW = 12; // total map tiles on y axis
+    public static final int WORLD_WIDTH = TILE_SIZE * MAX_WORLD_COL; //total map width
+    public static final int WORLD_HEIGHT = TILE_SIZE * MAX_WORLD_ROW; //total map height
+    public static final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL; // screen width 768
+    public static final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW; // screen height 576
     public int deathCounter = 0;
     public static int currentLevelNumber; //saves the level number that is currently being processed
 
     //GAME STATES : Informs us about what is happening currently in the game
-    public static final int PLAY_STATE = 0;//When game is running
-    public static final int PAUSE_STATE = 1;//when game is paused
-    public static final int MENU_STATE = 2;//when we are in the menu
-    public static final int WIN_LOSE_STATE = 3;//when level is concluded , either in win or defeat
+    public static final int PLAY_STATE = 0; //When game is running
+    public static final int PAUSE_STATE = 1; //when game is paused
+    public static final int MENU_STATE = 2; //when we are in the menu
+    public static final int WIN_LOSE_STATE = 3; //when level is concluded , either in win or defeat
     public static final int LEVEL_SELECTION_STATE = 4; //when we are in level selection menu
 
     public int gameState;
@@ -49,7 +52,7 @@ public class GamePanel extends JPanel implements Runnable {
     Sound se = new Sound();// created to have sound effects and at the same time music
     Thread gameThread; //Our main game thread
 
-    public Player player = new Player(7 * tileSize, floor, 30, tileSize, "Greek_warrior",this,1,1,keyHandler);
+    public Player player = new Player(7 * TILE_SIZE, FLOOR, 30, TILE_SIZE, "Greek_warrior",this,1,1,keyHandler);
     //public GameObjectSetter obstacleSetter = new GameObjectSetter(this);
     public HUD hud = new HUD(this);
     public Menu menu = new Menu(this);
@@ -72,8 +75,8 @@ public class GamePanel extends JPanel implements Runnable {
      * Creates the gamepanel where our game takes place
      */
     public GamePanel() {
-        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        this.setBackground(new Color(43, 145, 193));
+        this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
+        this.setBackground(new Color(0, 0, 0));
         this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
@@ -114,10 +117,10 @@ public class GamePanel extends JPanel implements Runnable {
         player.setCoinsCollected(0);
         player.setEnemiesKilled(0);
         player.setCollision(true);
-        player.setX(7 * tileSize);
-        player.setY(9 * tileSize);
-        player.screenX = 7 * tileSize;
-        player.screenY = 9 * tileSize;
+        player.setX(7 * TILE_SIZE);
+        player.setY(9 * TILE_SIZE);
+        player.screenX = 7 * TILE_SIZE;
+        player.screenY = 9 * TILE_SIZE;
         //object reset
         handler.clear();
         currentLevel.setupGameObjects();
@@ -141,7 +144,7 @@ public class GamePanel extends JPanel implements Runnable {
      * stops the game , nulls the thread
      */
     public void stopGameThread() {
-        this.gameThread = null;
+        gameThread = null;
     }
 
     @Override
@@ -199,6 +202,7 @@ public class GamePanel extends JPanel implements Runnable {
                 level3.checkForFinalBoss();
                 level3.addArrow();
             }
+
         } else if (gameState == MENU_STATE) {
             menu.textUpdate();
         }

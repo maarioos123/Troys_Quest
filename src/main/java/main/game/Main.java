@@ -1,4 +1,4 @@
-package main_game;
+package main.game;
 
 import javax.swing.*;
 

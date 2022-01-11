@@ -1,10 +1,10 @@
 package objects;
 
-import main_game.Animation;
-import main_game.GamePanel;
+import main.game.Animation;
+import main.game.GamePanel;
 //import sounds.Sound;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 /**
@@ -37,7 +37,7 @@ public class Coin extends StaticObject {
         double screenX = this.getX() - gamePanel.player.getX() + gamePanel.player.screenX;
         double screenY = this.getY();
         animation.drawAnimation(g2, (int) screenX, (int) screenY,
-                gamePanel.tileSize / 2, gamePanel.tileSize / 2);
+                GamePanel.TILE_SIZE / 2, GamePanel.TILE_SIZE / 2);
     }
 
     @Override

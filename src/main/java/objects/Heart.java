@@ -1,7 +1,7 @@
 package objects;
 
 
-import main_game.GamePanel;
+import main.game.GamePanel;
 /**
  * public class Heart
  * used to create a Heart for our player to increase his lives

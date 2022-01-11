@@ -1,8 +1,8 @@
 package objects;
 
-import main_game.Animation;
-import main_game.Resource;
-import main_game.GamePanel;
+import main.game.Animation;
+import main.game.Resource;
+import main.game.GamePanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -83,11 +83,11 @@ public class Enemy extends MovingObject {
         if (this.livesLeft <= 0) {
             this.state = State.DEAD;
             deathAnimation.runAnimation();
-        } else if (Math.abs(this.getX() - this.gamePanel.player.getX()) <= gamePanel.tileSize / 2 + gamePanel.tileSize / 9) {//when player x coordinate in [minotaurX*3/4*tilesize,minotaurX]
+        } else if (Math.abs(this.getX() - this.gamePanel.player.getX()) <= GamePanel.TILE_SIZE / 2 + GamePanel.TILE_SIZE / 9) {//when player x coordinate in [minotaurX*3/4*tilesize,minotaurX]
             this.state = State.ATTACK;
             attackAnimation.runAnimation();
-        } else if (Math.abs(this.getX() - this.gamePanel.player.getX()) < 3 * gamePanel.tileSize //when player x coordinate in (minotaurX*3*tilesize,minotaurX*3/4*tilesize)
-                && (Math.abs(this.getX() - this.gamePanel.player.getX()) > gamePanel.tileSize / 2 + gamePanel.tileSize / 10)) {
+        } else if (Math.abs(this.getX() - this.gamePanel.player.getX()) < 3 * GamePanel.TILE_SIZE //when player x coordinate in (minotaurX*3*tilesize,minotaurX*3/4*tilesize)
+                && (Math.abs(this.getX() - this.gamePanel.player.getX()) > GamePanel.TILE_SIZE / 2 + GamePanel.TILE_SIZE / 10)) {
             this.state = State.RUN;
             walkingAnimation.runAnimation();
             this.setX(this.getX() - 1);

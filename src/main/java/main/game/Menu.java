@@ -1,4 +1,4 @@
-package main_game;
+package main.game;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -38,7 +38,7 @@ public class Menu {
     public Menu(GamePanel gamePanel) {
         this.gamepanel = gamePanel;
         this.menuFont = new Font("MV Boli", Font.PLAIN, 35);
-        this.dynamicTextX = gamePanel.tileSize * 16;
+        this.dynamicTextX = gamePanel.TILE_SIZE * 16;
         try {
             this.helmetImage = ImageIO.read(new File("src/main/resources/menu/MenuHelmet.png"));
             this.backgroundImage = ImageIO.read(new File("src/main/resources/Backgrounds/backgroundMenu.png"));
@@ -59,7 +59,7 @@ public class Menu {
     public void textUpdate() {
         dynamicTextX-= 2;
         if(dynamicTextX == -2000){
-            dynamicTextX = gamepanel.tileSize * 16;
+            dynamicTextX = gamepanel.TILE_SIZE * 16;
         }
     }
 
@@ -70,11 +70,11 @@ public class Menu {
     public void drawMainMenu(Graphics2D g2) {
         g2.setFont(menuFont);
         //Background
-        g2.drawImage(backgroundImage , 0  , 0 ,gamepanel.tileSize * 16 , gamepanel.tileSize * 12  , null );
-        g2.drawImage(buttonImage , defaultX - 50 , defaultY + 70 , gamepanel.tileSize * 9 , 60  ,null);
-        g2.drawImage(buttonImage , defaultX - 50 , defaultY + 10, gamepanel.tileSize * 9 , 60  ,null);
-        g2.drawImage(buttonImage , defaultX - 50 , defaultY - 50 , gamepanel.tileSize * 9 , 60  ,null);
-        g2.drawImage(helmetImage , 600 , 45 , gamepanel.tileSize * 2  , 60  ,null);
+        g2.drawImage(backgroundImage , 0  , 0 ,gamepanel.TILE_SIZE * 16 , gamepanel.TILE_SIZE * 12  , null );
+        g2.drawImage(buttonImage , defaultX - 50 , defaultY + 70 , gamepanel.TILE_SIZE * 9 , 60  ,null);
+        g2.drawImage(buttonImage , defaultX - 50 , defaultY + 10, gamepanel.TILE_SIZE * 9 , 60  ,null);
+        g2.drawImage(buttonImage , defaultX - 50 , defaultY - 50 , gamepanel.TILE_SIZE * 9 , 60  ,null);
+        g2.drawImage(helmetImage , 600 , 45 , gamepanel.TILE_SIZE * 2  , 60  ,null);
 
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 80));
         String title = "Troy's Quest";
@@ -125,10 +125,10 @@ public class Menu {
     public void drawPauseMenu(Graphics2D g2) {
         g2.setFont(menuFont);
         //Background
-        g2.drawImage(backgroundImage , 0  , 0 ,gamepanel.tileSize * 16 , gamepanel.tileSize * 12  , null );
-        g2.drawImage(buttonImage , defaultX - 50 , defaultY + 70 , gamepanel.tileSize * 9 , 60  ,null);
-        g2.drawImage(buttonImage , defaultX - 50 , defaultY + 10, gamepanel.tileSize * 9 , 60  ,null);
-        g2.drawImage(buttonImage , defaultX - 50 , defaultY - 50 , gamepanel.tileSize * 9 , 60  ,null);
+        g2.drawImage(backgroundImage , 0  , 0 ,gamepanel.TILE_SIZE * 16 , gamepanel.TILE_SIZE * 12  , null );
+        g2.drawImage(buttonImage , defaultX - 50 , defaultY + 70 , gamepanel.TILE_SIZE * 9 , 60  ,null);
+        g2.drawImage(buttonImage , defaultX - 50 , defaultY + 10, gamepanel.TILE_SIZE * 9 , 60  ,null);
+        g2.drawImage(buttonImage , defaultX - 50 , defaultY - 50 , gamepanel.TILE_SIZE * 9 , 60  ,null);
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 80));
         //Title
         String title = "PAUSE";
@@ -175,13 +175,13 @@ public class Menu {
         //if he has lives left we draw the win menu
         g2.setFont(menuFont);
             //BACKGROUND
-            g2.drawImage(backgroundImage , 0  , 0 ,gamepanel.tileSize * 16 , gamepanel.tileSize * 12  , null );
-            g2.drawImage(buttonImage , defaultX - 50 , defaultY + 70 , gamepanel.tileSize * 9 , 60  ,null);
-            g2.drawImage(buttonImage , defaultX - 50 , defaultY + 10, gamepanel.tileSize * 9 , 60  ,null);
-            g2.drawImage(buttonImage , defaultX - 50 , defaultY - 50 , gamepanel.tileSize * 9 , 60  ,null);
+            g2.drawImage(backgroundImage , 0  , 0 ,gamepanel.TILE_SIZE * 16 , gamepanel.TILE_SIZE * 12  , null );
+            g2.drawImage(buttonImage , defaultX - 50 , defaultY + 70 , gamepanel.TILE_SIZE * 9 , 60  ,null);
+            g2.drawImage(buttonImage , defaultX - 50 , defaultY + 10, gamepanel.TILE_SIZE * 9 , 60  ,null);
+            g2.drawImage(buttonImage , defaultX - 50 , defaultY - 50 , gamepanel.TILE_SIZE * 9 , 60  ,null);
             String title;
             if(gamepanel.player.getLivesLeft() == 0){
-                g2.drawImage(tombImage , 250 , 110 , gamepanel.tileSize * 5 , gamepanel.tileSize * 3 , null);
+                g2.drawImage(tombImage , 250 , 110 , gamepanel.TILE_SIZE * 5 , gamepanel.TILE_SIZE * 3 , null);
                 title = "YOU LOSE!";
             } else {
                 title = "YOU WIN!";
@@ -193,16 +193,16 @@ public class Menu {
                     g2.setColor(new Color(181, 179, 92));
                     g2.drawString("TOTAL SCORE: " + levelScore , 170 , 480);
                     if(levelScore <= 850){
-                        g2.drawImage(wreath , 250 , 107 , gamepanel.tileSize * 5 , gamepanel.tileSize * 3 , null);
+                        g2.drawImage(wreath , 250 , 107 , gamepanel.TILE_SIZE * 5 , gamepanel.TILE_SIZE * 3 , null);
                         numOfStars = 1;
                     } else if (levelScore <= 1150){
-                        g2.drawImage(wreath , 130 , 150 , gamepanel.tileSize * 4 , gamepanel.tileSize * 2 , null);
-                        g2.drawImage(wreath , 250 , 107 , gamepanel.tileSize * 5 , gamepanel.tileSize * 3 , null);
+                        g2.drawImage(wreath , 130 , 150 , gamepanel.TILE_SIZE * 4 , gamepanel.TILE_SIZE * 2 , null);
+                        g2.drawImage(wreath , 250 , 107 , gamepanel.TILE_SIZE * 5 , gamepanel.TILE_SIZE * 3 , null);
                         numOfStars = 2;
                     } else {
-                        g2.drawImage(wreath , 130 , 150 , gamepanel.tileSize * 4 , gamepanel.tileSize * 2 , null);
-                        g2.drawImage(wreath , 250 , 107 , gamepanel.tileSize * 5 , gamepanel.tileSize * 3 , null);
-                        g2.drawImage(wreath , 420 , 150 , gamepanel.tileSize * 4 , gamepanel.tileSize * 2 , null);
+                        g2.drawImage(wreath , 130 , 150 , gamepanel.TILE_SIZE * 4 , gamepanel.TILE_SIZE * 2 , null);
+                        g2.drawImage(wreath , 250 , 107 , gamepanel.TILE_SIZE * 5 , gamepanel.TILE_SIZE * 3 , null);
+                        g2.drawImage(wreath , 420 , 150 , gamepanel.TILE_SIZE * 4 , gamepanel.TILE_SIZE * 2 , null);
                         numOfStars = 3;
                     }
                 g2.setColor(Color.BLACK);
@@ -262,7 +262,7 @@ public class Menu {
         int defaultXs = 100; // change reference points to adjust to new menu environment
         int defaultYs = 200;
         //Background
-        g2.drawImage(backgroundImage , 0  , 0 ,gamepanel.tileSize * 16 , gamepanel.tileSize * 12  , null);
+        g2.drawImage(backgroundImage , 0  , 0 ,gamepanel.TILE_SIZE * 16 , gamepanel.TILE_SIZE * 12  , null);
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 80));
         String title = "Level Selection";
         //Title Shadow
@@ -278,7 +278,7 @@ public class Menu {
         g2.drawString(option, defaultXs + shadowOffset, defaultYs + shadowOffset );
         g2.setColor(new Color(181, 179, 92));
         g2.drawString(option, defaultXs , defaultYs);
-        g2.drawImage(lv1Preview , defaultXs + 200 , defaultYs - 65 , gamepanel.tileSize * 3 , gamepanel.tileSize * 2 , null);
+        g2.drawImage(lv1Preview , defaultXs + 200 , defaultYs - 65 , gamepanel.TILE_SIZE * 3 , gamepanel.TILE_SIZE * 2 , null);
         g2.setColor(Color.BLACK);
         if (choice == 0) {
             g2.drawString(">", defaultXs - 30 , defaultYs);
@@ -289,7 +289,7 @@ public class Menu {
         g2.setColor(new Color(181, 179, 92));
         g2.drawString(option, defaultXs, defaultYs + 130);
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40));
-        g2.drawImage(lv2Preview , defaultXs + 200 , defaultYs + 70 , gamepanel.tileSize * 3 , gamepanel.tileSize * 2 , null);
+        g2.drawImage(lv2Preview , defaultXs + 200 , defaultYs + 70 , gamepanel.TILE_SIZE * 3 , gamepanel.TILE_SIZE * 2 , null);
         g2.setColor(Color.BLACK);
         if (choice == 1) {
             g2.drawString(">", defaultXs - 30, defaultYs + 130);
@@ -298,7 +298,7 @@ public class Menu {
         g2.drawString(option, defaultXs + shadowOffset, defaultYs + shadowOffset + 260);
         g2.setColor(new Color(181, 179, 92));
         g2.drawString(option, defaultXs , defaultYs + 260);
-        g2.drawImage(lv3Preview , defaultXs + 200 , defaultYs + 205 , gamepanel.tileSize * 3 , gamepanel.tileSize * 2 , null);
+        g2.drawImage(lv3Preview , defaultXs + 200 , defaultYs + 205 , gamepanel.TILE_SIZE * 3 , gamepanel.TILE_SIZE * 2 , null);
         g2.setColor(Color.BLACK);
         if (choice == 2) {
             g2.drawString(">", defaultXs -30, defaultYs + 260);

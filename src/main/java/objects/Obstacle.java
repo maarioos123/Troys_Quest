@@ -1,8 +1,8 @@
 package objects;
 
-import main_game.*;
+import main.game.GamePanel;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 
 /**
  * public class Obstacle
