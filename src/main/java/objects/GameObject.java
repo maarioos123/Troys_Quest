@@ -6,6 +6,9 @@ import java.awt.*;
 
 //superclass for all the object of the game
 public abstract class GameObject extends Rectangle {
+    final String name;
+    public boolean collision = false;
+    public Rectangle area; //creating invisible rectangle to store data
     /**
      * this method extends Rectangle class from java.awt to implement collision
      * what all the objects have in common
@@ -19,11 +22,6 @@ public abstract class GameObject extends Rectangle {
     double worldX;
     double worldY;
     GamePanel gamePanel;
-    public boolean collision = false;
-    final String name;
-
-
-    public Rectangle area; //creating invisible rectangle to store data
 
     //generic constructor , spawns game objects at x ,y coordinates , sets the speed in x,y axis 
     public GameObject(double worldX, double worldY, int width, int height, String name, GamePanel gamePanel) {

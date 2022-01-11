@@ -4,8 +4,7 @@ import main.game.Animation;
 import main.game.GamePanel;
 import main.game.Resource;
 
-import java.awt.Graphics2D;
-
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public abstract class StaticObject extends GameObject {

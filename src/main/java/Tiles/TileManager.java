@@ -2,11 +2,10 @@ package Tiles;
 
 import main.game.GamePanel;
 import main.game.ImageScaler;
+import main.game.Resource;
 
-import javax.imageio.ImageIO;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -17,53 +16,76 @@ import java.io.InputStreamReader;
 
 public class TileManager {
 
-    GamePanel gp; //we need an instance of the game panel
-    Tile[] tile; // we create an array of tiles , where all the pngs which we use shall be stored
-
-    int[][] mapTileNumber; //a 2D array that witch represents our mapLayout
+    /**
+     * gp: we need an instance of the game panel.
+     */
+    GamePanel gp;
+    /**
+     *  tile: we create an array of tiles for all pngs.
+     */
+    Tile[] tile;
+    /**
+     * mapTileNumber: a 2D array that witch represents our mapLayout.
+     */
+    int[][] mapTileNumber;
     public int worldx;
     public int worldy;
+    /**
+     * ntiles number of tiles we have.
+     */
+    private final int ntiles = 30;
 
     /**
-     * Tile Manager Constructor
+     * Tile Manager Constructor.
      * Sets the size of the array containing the tiles
      * thus representing how many different style tiles exist in our game
-     * @param gp Our main Game Panel on witch all our components are combined and drawn
+     *
+     * @param gp main Game Panel on witch all components are combined and drawn
      */
     public TileManager(GamePanel gp) {
         this.gp = gp;
-        tile = new Tile[30];
-        mapTileNumber = new int[GamePanel.MAX_WORLD_COL][GamePanel.MAX_WORLD_ROW];//we initialise the array that represents our map so that its size is the same as our level
-        getTileImage();//we load the images of the tiles from the /res folder
+        tile = new Tile[ntiles];
+        //we initialise the array that represents our map
+        // so that its size is the same as our level
+        mapTileNumber = new
+                int[GamePanel.MAX_WORLD_COL][GamePanel.MAX_WORLD_ROW];
+        getTileImage(); //we load the images of the tiles from the /res folder
 
     }
 
     /**
-     * This method initialises our tile[] array so that every cell contains a single tile represented by a .png
-     * We do that because the map is constructed based on a .txt file (e.g. mapLayout) which contains integers ranging from 1 to tile.length()
-     * Instead of initializing the tiles one by one we pass all the tile names to an array, and we use a for loop to specify each tile image
-    */
+     * This method initialises our tile[] array so that every cell contains
+     * a single  tile represented by a .png
+     * We do that because the map is constructed based on a .txt file
+     * (e.g. mapLayout) which contains integers ranging from 1 to tile.length()
+     * Instead of initializing the tiles one by one we pass all the tile names
+     * to an array, and we use a for loop to specify each tile image
+     */
     public void getTileImage() {
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < ntiles; i++) {
             tile[i] = new Tile();
-        }//if there are no tiles placed at a certain spot , the background shows
+        } //if there are no tiles placed at a certain spot, the background shows
         //we input 0 on the .txt file where we want the background to show
-        String[] tilename = new String[]{"sandRocksTop.png", "seaFull.png", "seaDown.png", "cloud1.png", "sky.png", "bush.png", "CrossBoxFill.png", "crossBox.png",
-                "RockGround.png", "rockBackground.png", "rockRedBG.png", "torch_bg.png", "RockCeiling.png", "gravelCeiling.png", "stalagmiteCeiling.png",
-                "CasteWallBg.png", "grillFireWallBg.png", "grillWallBg.png", "plankOnWaterGround.png", "WaterfallEnd.png", "CastleWallTop.png"};
+        String[] tilename = new String[]{"sandRocksTop.png", "seaFull.png",
+                "seaDown.png", "cloud1.png", "sky.png", "bush.png",
+                "CrossBoxFill.png", "crossBox.png", "RockGround.png",
+                "rockBackground.png", "rockRedBG.png", "torch_bg.png",
+                "RockCeiling.png", "gravelCeiling.png", "stalagmiteCeiling.png",
+                "CasteWallBg.png", "grillFireWallBg.png", "grillWallBg.png",
+                "plankOnWaterGround.png",
+                "WaterfallEnd.png", "CastleWallTop.png"};
         for (int i = 1; i <= tilename.length; i++) { //for every tile image
-            try {
-                tile[i].image = ImageIO.read(getClass().getResourceAsStream(tilename[i - 1])); //read the image
-                tile[i].image = ImageScaler.scaleImage(tile[i].image , GamePanel.TILE_SIZE , GamePanel.TILE_SIZE); //and then scale the image
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+            tile[i].image = Resource.getResourceImage("tiles", tilename[i - 1]); //read the image
+            tile[i].image = ImageScaler.scaleImage(tile[i].image, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE); //and then scale the image
+
         }
     }
 
     /**
-     *  This method receives the map as a .txt file in the mapPath
-     *  and fills up our mapTileNumber array accordingly so that the numbers in array match those in the txt file
+     * This method receives the map as a .txt file in the mapPath
+     * and fills up our mapTileNumber array accordingly so that the numbers in array match those in the txt file
+     *
      * @param mapPath the map Layout .txt path from the res folder
      */
 
@@ -77,9 +99,11 @@ public class TileManager {
             int col = 0;
             int row = 0;
 
-            while (col < GamePanel.MAX_WORLD_COL && row < GamePanel.MAX_WORLD_ROW) { //loop through all the file's rows and columns one by one
+            while (col < GamePanel.MAX_WORLD_COL && row < GamePanel.MAX_WORLD_ROW) {
+                //loop through all the file's rows and columns one by one
 
-                String line = br.readLine(); //read each line separately and create a String variable for each one
+                //read each line separately and create a String variable for each one
+                String line = br.readLine();
                 while (col < GamePanel.MAX_WORLD_COL) { // loop through all columns of the current line
 
                     String[] numbers = line.split(" "); // make a 1D String array witch contains all the numbers of the specific line
@@ -157,8 +181,8 @@ public class TileManager {
             }
 
             //Optimization : we only draw the tiles located around the player and the left and right edge of the frame
-            if(worldX + GamePanel.TILE_SIZE > gp.player.getX() - gp.player.screenX && //distance between player and left edge
-                    worldX - GamePanel.TILE_SIZE  < gp.player.getX() + gp.player.screenX + 2 * GamePanel.TILE_SIZE) { //distance between player and right edge
+            if (worldX + GamePanel.TILE_SIZE > gp.player.getX() - gp.player.screenX && //distance between player and left edge
+                    worldX - GamePanel.TILE_SIZE < gp.player.getX() + gp.player.screenX + 2 * GamePanel.TILE_SIZE) { //distance between player and right edge
                 g2.drawImage(tile[tileNum].image, (int) screenX, (int) screenY, null); //draws the tile in the specified screenX and screenY
             }
 

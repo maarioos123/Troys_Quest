@@ -3,8 +3,7 @@ package objects;
 import main.game.GamePanel;
 import sounds.Sound;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.text.DecimalFormat;
 import java.util.LinkedList;
 
@@ -61,9 +60,9 @@ public class Handler {
     }
 
     /**
-    Checks for collision of the player with any obstacles
-    if a player collides,he is invulnerable for a couple of seconds
-    */
+     * Checks for collision of the player with any obstacles
+     * if a player collides,he is invulnerable for a couple of seconds
+     */
     public boolean checkPlayerCollision() {
 
         decFormat.format(timer);
@@ -120,7 +119,7 @@ public class Handler {
         int i = 0;
         //this is used to check if player has collided with the top of a block.
         // if yes we dont check collision with the next block but we keep checking with the same block
-        while (i < blockList.size() && hascollided == false) {
+        while (i < blockList.size() && !hascollided) {
             Block block = blockList.get(i);
             //right collision with platform
             if (player.intersectsLine(block.rightLine) && player.counter < 1) {
@@ -221,6 +220,7 @@ public class Handler {
     /**
      * Accepts a game object (x) and decides in what list to put it in
      * So we check collisions in the right way
+     *
      * @param x: Game object that we want to add
      */
     public void add(GameObject x) {
@@ -230,7 +230,7 @@ public class Handler {
             enemies.add((Enemy) x);
         } else if (x.getClass().equals(Block.class)) {
             blockList.add((Block) x);
-        } else if (x.getClass().equals(Heart.class)){
+        } else if (x.getClass().equals(Heart.class)) {
             heartlist.add((Heart) x);
         } else {
             obstacles.add(x);

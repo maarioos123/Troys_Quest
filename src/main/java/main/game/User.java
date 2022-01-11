@@ -1,5 +1,7 @@
 package main.game;
 
+import netscape.javascript.JSObject;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;

@@ -2,8 +2,7 @@ package objects;
 
 import main.game.GamePanel;
 
-
-import java.awt.Graphics2D;
+import java.awt.*;
 
 /**
  * public class MovingObstacle

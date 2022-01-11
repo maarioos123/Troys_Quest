@@ -6,8 +6,7 @@ import main.game.KeyHandler;
 import main.game.Resource;
 import sounds.Sound;
 
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 //Subclass of Game Object responsible for the moving and drawing the character of the game

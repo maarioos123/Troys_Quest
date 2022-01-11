@@ -19,13 +19,14 @@ public class Heart extends StaticObject {
     public void update() {
         super.update();
     }
+
     /**
      * checkcollision() used to check the cOllision with the player
      * if heart collides with player he gets one more life
      * we check collision with all the Hearts in Handler class
      */
     public boolean checkcollision() {
-        boolean collision =  false;
+        boolean collision = false;
         if (gamePanel.player.intersects(this)) {
             collision = true;
             System.out.println("picked");
@@ -38,7 +39,7 @@ public class Heart extends StaticObject {
     public void render(Graphics2D g2) {
         double screenX = this.getX() - gamePanel.player.getX() + gamePanel.player.screenX;
         double screenY = this.getY();
-        g2.drawImage(images[0], (int) screenX , (int) screenY + GamePanel.TILE_SIZE,
+        g2.drawImage(images[0], (int) screenX, (int) screenY + GamePanel.TILE_SIZE,
                 GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
     }
 }

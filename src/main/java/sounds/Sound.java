@@ -46,10 +46,10 @@ public class Sound {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
-    public void playMusic(int i , boolean loop) {
+    public void playMusic(int i, boolean loop) {
         this.setFile(i);
         clip.start();
-        if(loop){
+        if (loop) {
             clip.loop(Clip.LOOP_CONTINUOUSLY);
         }
     }

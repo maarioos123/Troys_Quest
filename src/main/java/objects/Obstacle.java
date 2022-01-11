@@ -2,7 +2,7 @@ package objects;
 
 import main.game.GamePanel;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 
 /**
  * public class Obstacle
@@ -20,31 +20,31 @@ public class Obstacle extends StaticObject {
         collision = false;
     }
 
-    @Override
     /**
      * renders our obstacles , ie draws them on the gamepanel
      * if in place so that obstacles with no animation and with animation handled differently
      * @param graphics2D graphics instance used to draw on screen
      *
      */
+    @Override
     public void render(Graphics2D graphics2D) {
         super.render(graphics2D);
     }
 
-    @Override
     /**
      * update() used to draw our obstacle and update it in real time
      * runs the animation of the obstacle when game is updated
      */
+    @Override
     public void update() {
         super.update();
     }
 
     public boolean checkCollision() {
-        if(gamePanel.player.intersects(this)) {
+        if (gamePanel.player.intersects(this)) {
             collision = true;
             return true;
-        }else {
+        } else {
             return false;
         }
     }

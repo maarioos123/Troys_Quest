@@ -19,6 +19,7 @@ public class KeyHandler implements KeyListener {
 
     /**
      * Creates a keyhandler instance and the keys handled are used in the gamepanel
+     *
      * @param gp the gamepanel in which keys are used
      */
     public KeyHandler(GamePanel gp) {
@@ -29,7 +30,6 @@ public class KeyHandler implements KeyListener {
     public void keyTyped(KeyEvent e) {
     }
 
-    @Override
     /**
      * This method receives key inputs and translates them into readable code , then treats them accordingly
      * @param k the key input received
@@ -38,12 +38,13 @@ public class KeyHandler implements KeyListener {
      * main menu , pause menu and death menu handled here
      *
      */
+    @Override
     public void keyPressed(KeyEvent k) {
         int key = k.getKeyCode(); //get the code of key pressed
         //MENU_STATE and PAUSE_STATE KEY INPUT
         //Each key has a different function in each game state
-        if(gp.gameState == GamePanel.MENU_STATE || gp.gameState == GamePanel.PAUSE_STATE
-                || gp.gameState == GamePanel.WIN_LOSE_STATE || gp.gameState == GamePanel.LEVEL_SELECTION_STATE){
+        if (gp.gameState == GamePanel.MENU_STATE || gp.gameState == GamePanel.PAUSE_STATE
+                || gp.gameState == GamePanel.WIN_LOSE_STATE || gp.gameState == GamePanel.LEVEL_SELECTION_STATE) {
             //Since there are 3 choices in each menu we handle them similarly
             if (key == KeyEvent.VK_UP) { //UP
                 gp.menu.choice--;
@@ -125,7 +126,6 @@ public class KeyHandler implements KeyListener {
         }
 
 
-
         //GAME STATE KEY INPUT
         //The speed that we will be moving objects.Player
         //We need to check after every button click because it is increasing through time
@@ -173,6 +173,7 @@ public class KeyHandler implements KeyListener {
 
     /**
      * switches between the sounds we want played
+     *
      * @param soundNumber the number of the sound file we want played
      */
     public void switchSound(int soundNumber) {
