@@ -1,14 +1,16 @@
 package main_game;
 
-import objects.*;
-import sounds.Sound;
-import Tiles.*;
 
+import objects.Bound;
+import objects.Handler;
+import objects.Player;
+import sounds.Sound;
+import Tiles.TileManager;
 import javax.swing.JPanel;
 import java.awt.*;
 
 /**
- * class GamePanel
+ * class GamePanel.
  *  creates an instance where our game takes place
  *  pre-determined height , width both for the window and the map
  *  different states depending on what state our game is currently (playing , menu , paused)
@@ -139,7 +141,7 @@ public class GamePanel extends JPanel implements Runnable {
      * stops the game , nulls the thread
      */
     public void stopGameThread() {
-        gameThread = null;
+        this.gameThread = null;
     }
 
     @Override
@@ -197,7 +199,6 @@ public class GamePanel extends JPanel implements Runnable {
                 level3.checkForFinalBoss();
                 level3.addArrow();
             }
-
         } else if (gameState == MENU_STATE) {
             menu.textUpdate();
         }
