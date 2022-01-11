@@ -175,10 +175,10 @@ public class Player extends MovingObject {
     }
 
     public void still() {
-        if ((!keyHandler.rightPressed) && (!keyHandler.leftPressed) &&
-                (!keyHandler.upPressed) && (!keyHandler.attackPressed)) {
+        if (((!keyHandler.rightPressed) && (!keyHandler.leftPressed) &&
+                (!keyHandler.upPressed) && (!keyHandler.attackPressed))) {
             idleanimation.runAnimation();
-            state = State.ALIVE;
+            this.state = State.ALIVE;
         }
         if (keyHandler.attackPressed) {
             state = State.ATTACK;
@@ -189,7 +189,7 @@ public class Player extends MovingObject {
 
     public void jump() {
         if (keyHandler.upPressed && !jumped) {
-            jumped = true;
+            this.jumped = true;
             state = State.JUMP;
             this.setSpeedy(12);
             jumpinganimation.runAnimation();

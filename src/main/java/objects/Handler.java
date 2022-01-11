@@ -200,6 +200,7 @@ public class Handler {
             }
             if (enemy.intersects(player.attackHitbox) &&
                     player.isAttackCollision && enemy.livesLeft > 0 && enemy.isCollision()) {
+                soundEffect.playSE(8);
                 enemy.livesLeft -= 1;
                 enemy.setCollision(false);
                 enemy.colissionTime = this.timer;

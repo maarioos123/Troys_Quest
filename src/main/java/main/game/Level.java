@@ -49,7 +49,7 @@ public class Level {
         this.hasFinalBoss = hasFinalBoss;
         this.hasBlocks = hasBlocks;
     }
-
+    public Level() {}
     /**
      * sets up the background tiles of the level the instance represents
      * sets up everything in our handler lists enemies/tiles/obstacles/coins
