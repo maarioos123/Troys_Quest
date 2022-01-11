@@ -60,7 +60,7 @@ public class HUD {
         g2.drawImage(coinImage, (gamepanel.TILE_SIZE / 2) + 3 * gamepanel.TILE_SIZE, gamepanel.TILE_SIZE / 2 - 10,
                 gamepanel.TILE_SIZE, gamepanel.TILE_SIZE, null); //coin image drawing
         g2.drawString("x " + gamepanel.player.getCoinsCollected(), (int) ((gamepanel.TILE_SIZE / 2) + 4.5 * gamepanel.TILE_SIZE), 50); //level coins collected
-        if (counter < 200 && GamePanel.currentLevelNumber == 1) { //Only at lv1 and for around 3 seconds(200/60FPS) the controls are displayed
+        if (counter < 600 && GamePanel.currentLevelNumber == 1) { //Only at lv1 and for around 3 seconds(200/60FPS) the controls are displayed
             g2.setColor(Color.BLACK);
             g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 20));
             g2.drawString("MOVE", 630, 90);
