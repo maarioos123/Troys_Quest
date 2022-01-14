@@ -2,7 +2,13 @@ package main.game;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-
+/**
+ * Animation class
+ * In this class we create animations for all gameobjects
+ * we implement an animation with an array of images that get changed by a speed
+ * this speed is adjusted from the number of images and the frames per second
+ * we draw an animation and we run it
+ */
 //this class draws the animation in the screen
 public class Animation {
     public int frames; // how many photos we have to change for the animation to be done
@@ -24,6 +30,12 @@ public class Animation {
     }
 
     //calling this method makes the animation run in backend
+    /**
+     * Method used to run the animation in backend
+     * we use index to count the frames per second that had passed each second
+     * then we change the frame(image) when index reaches speed
+     * so if we change 5 frames per second(speed) when index reaches 5 we change picture and count again until we reach the speed
+     */
     public void runAnimation() {
         index++;
         if (index > speed) {
@@ -33,7 +45,10 @@ public class Animation {
     }
 
     //this method changes the frame
-    public void nextFrame() {
+    /**
+     * Method used to change image of the animation
+     */
+    private void nextFrame() {
         for (int i = 0; i < frames; i++) {
             if (count == i) {
                 currentImg = images[i];
@@ -44,11 +59,15 @@ public class Animation {
             count = 0;
         }
     }
-
+    /**
+     * Method used to draw animations with a scaling
+     */
     public void drawAnimation(Graphics2D g, int x, int y, int scalex, int scaley) {
         g.drawImage(currentImg, x, y, scalex, scaley, null);
     }
-
+    /**
+     * Method used to draw animations without a scaling
+     */
     public void drawAnimation(Graphics2D g, int x, int y) {
         g.drawImage(currentImg, x, y, null);
     }

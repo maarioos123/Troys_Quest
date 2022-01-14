@@ -1,7 +1,7 @@
 package objects;
 
 import junit.framework.TestCase;
-import main_game.KeyHandler;
+import main.game.KeyHandler;
 
 public class PlayerTest extends TestCase {
 

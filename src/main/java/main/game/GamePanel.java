@@ -34,7 +34,6 @@ public class GamePanel extends JPanel implements Runnable {
     public static final int WORLD_HEIGHT = TILE_SIZE * MAX_WORLD_ROW; //total map height
     public static final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL; // screen width 768
     public static final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW; // screen height 576
-    public int deathCounter = 0;
     public static int currentLevelNumber; //saves the level number that is currently being processed
 
     //GAME STATES : Informs us about what is happening currently in the game
@@ -148,19 +147,19 @@ public class GamePanel extends JPanel implements Runnable {
         gameThread = null;
     }
 
-    @Override
+
     /**
      * implements the game loop
      * counts framerate , time passed and other metrics
      * updates and repaints the gamepanel 60 times/sec (update() and repaint())
      */
+    @Override
     public void run() {
         long lastTime = System.nanoTime();
         double amountOfTicks = 60.0;
         double ns = 1000000000 / amountOfTicks;
         double delta = 0;
         long timer = 0;
-        int frames = 0;
         while (gameThread != null) { //do this if the thread is active
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
@@ -170,11 +169,8 @@ public class GamePanel extends JPanel implements Runnable {
                 update();
                 repaint();
                 delta--;
-                frames++;
             }
             if (timer > 1000000000) {
-                //System.out.println("FPS " + frames); //prints out our fps to check if it works
-                frames = 0;
                 timer = 0;
             }
         }
@@ -198,8 +194,6 @@ public class GamePanel extends JPanel implements Runnable {
             //Gameplay differentiation between the 3 levels
             if (currentLevelNumber == 1) { //LEVEL1
                 level1.addArrow();
-            } else if (currentLevelNumber == 2) { //LEVEL2
-
             } else if (currentLevelNumber == 3) { //LEVEL 3
                 level3.checkForFinalBoss();
                 level3.addArrow();
@@ -228,12 +222,6 @@ public class GamePanel extends JPanel implements Runnable {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-
-        //OPTIMIZATION
-        long drawStart = 0;
-        drawStart = System.nanoTime();
-
-
         if (gameState == MENU_STATE) {
             menu.drawMainMenu(g2);
         } else if (gameState == PAUSE_STATE) {

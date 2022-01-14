@@ -12,9 +12,7 @@ import java.awt.image.BufferedImage;
 //Subclass of Game Object responsible for the moving and drawing the character of the game
 public class Player extends MovingObject {
     public double floor; //floor of every platform
-    public double platfloor;
     public boolean jumped = true;
-    public float jumpingTime = 100;
     //player gets keyhandler to implement keyboard input
     public KeyHandler keyHandler;
     //player needs Game Panel to spawn on it
@@ -101,13 +99,13 @@ public class Player extends MovingObject {
     //moves the player by altering the x,y coordinates with keyboard arrows
     @Override
     public void update() {
-        still();
-        gravity();
-        jump();
-        run();
-        death();
-        // when space is pressed , isAttackCollision indicates that enemies can collide with the sword's hitbox
-        isAttackCollision = keyHandler.attackPressed;
+            still();
+            gravity();
+            jump();
+            run();
+            death();
+            // when space is pressed , isAttackCollision indicates that enemies can collide with the sword's hitbox
+            isAttackCollision = keyHandler.attackPressed;
     }
 
     // the direction variable indicates which images are to be drawn for each animation of the player
@@ -135,8 +133,6 @@ public class Player extends MovingObject {
                 switch (state) {
                     case JUMP -> jumpinganimation.drawAnimation(g, screenX, screenY,
                             GamePanel.TILE_SIZE, GamePanel.TILE_SIZE);
-                    case DEAD -> deathanimation.drawAnimation(g, screenX, screenY,
-                            GamePanel.TILE_SIZE + 24, GamePanel.TILE_SIZE + 24);
                     case LEFT -> leftanimation.drawAnimation(g, screenX, screenY,
                             GamePanel.TILE_SIZE, GamePanel.TILE_SIZE);
                     case RIGHT -> rightanimation.drawAnimation(g, screenX, screenY,
@@ -151,8 +147,7 @@ public class Player extends MovingObject {
         //Only when player reaches the right edge of the screen , his screenX and screenY need to be adjusted
         int rightDiff = GamePanel.SCREEN_WIDTH - screenX;
         if (rightDiff > GamePanel.WORLD_WIDTH - getX()) {
-            screenX =
-                    GamePanel.SCREEN_WIDTH - (GamePanel.WORLD_WIDTH - (int) getX()); //and we subtract the difference from the current tile from the edge of the screen
+            screenX = GamePanel.SCREEN_WIDTH - (GamePanel.WORLD_WIDTH - (int) getX()); //and we subtract the difference from the current tile from the edge of the screen
         }
     }
 
@@ -170,6 +165,8 @@ public class Player extends MovingObject {
             attackHitbox.y = (int) (floor - 1);
             screenY = (int) floor;
             this.setSpeedy(0);
+        }else {
+            jumpinganimation.runAnimation();
         }
     }
 
@@ -187,7 +184,7 @@ public class Player extends MovingObject {
     }
 
     public void jump() {
-        if (keyHandler.upPressed && !jumped) {
+        if (keyHandler.upPressed && !jumped ) {
             this.jumped = true;
             state = State.JUMP;
             this.setSpeedy(12);
